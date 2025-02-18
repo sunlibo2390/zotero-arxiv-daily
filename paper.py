@@ -20,7 +20,7 @@ class ArxivPaper:
     
     @property
     def title(self) -> str:
-        print("title",self._paper.title)
+        # print("title",self._paper.title)
         return self._paper.title
     
     @property
