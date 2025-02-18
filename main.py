@@ -60,7 +60,6 @@ def get_arxiv_paper(query:str, debug:bool=False) -> list[ArxivPaper]:
             batch = [ArxivPaper(p) for p in client.results(search)]
             bar.update(len(batch))
             papers.extend(batch)
-            print(batch)
         bar.close()
 
     else:
