@@ -127,14 +127,19 @@ def render_email(papers:list[ArxivPaper]):
         authors = ', '.join(authors)
         if len(p.authors) > 5:
             authors += ', ...'
-        print(p)
-        if p.affiliations is not None:
-            affiliations = p.affiliations[:5]
-            affiliations = ', '.join(affiliations)
-            if len(p.affiliations) > 5:
-                affiliations += ', ...'
-        else:
-            affiliations = 'Unknown Affiliation'
+        while True:
+          try:
+            if p.affiliations is not None:
+                affiliations = p.affiliations[:5]
+                affiliations = ', '.join(affiliations)
+                if len(p.affiliations) > 5:
+                    affiliations += ', ...'
+            else:
+                affiliations = 'Unknown Affiliation'
+            break
+          except:
+            print(f"Loading affiliations error! Title: {p.title}")
+            continue
         parts.append(get_block_html(p.title, authors,rate,p.arxiv_id ,p.tldr, p.pdf_url, p.code_url, affiliations))
 
     content = '<br>' + '</br><br>'.join(parts) + '</br>'
