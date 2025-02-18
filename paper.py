@@ -20,6 +20,7 @@ class ArxivPaper:
     
     @property
     def title(self) -> str:
+        print("title",self._paper.title)
         return self._paper.title
     
     @property
@@ -66,6 +67,7 @@ class ArxivPaper:
     def tex(self) -> dict[str,str]:
         with ExitStack() as stack:
             tmpdirname = stack.enter_context(TemporaryDirectory())
+            print(tmpdirname)
             file = self._paper.download_source(dirpath=tmpdirname)
             try:
                 tar = stack.enter_context(tarfile.open(file))
